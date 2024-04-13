@@ -1,4 +1,6 @@
 using Infrastructure;
+using NSwag.AspNetCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,23 +9,31 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddControllers();
+builder.Services.AddRazorPages();
+builder.Services.AddOpenApiDocument((configure, sp) =>
+{
+    configure.Title = "QuickRetro API";
+});
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
+app.UseStaticFiles();
 app.UseHttpsRedirection();
+
+app.UseSwaggerUi(settings =>
+{
+    settings.Path = "/api";
+    settings.DocumentPath = "/api/specification.json";
+});
+
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller}/{action=Index}/{id?}"
-);
+    pattern: "{controller}/{action=Index}/{id?}");
+
+
+app.MapEndpoints();
 
 app.Run();

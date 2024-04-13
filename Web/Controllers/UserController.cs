@@ -1,15 +1,25 @@
 ﻿using Application.Users.Commands;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
+using Web.Infrastructure;
 
 namespace Web.Controllers;
 
-[ApiController]
-public class UserController : ControllerBase
+public class UserController : EndpointGroupBase
 {
-    [HttpPost("CreateUser")]
-    public async Task<int> CreateUser(ISender sender, CreateUserCommand command)
+    public override void Map(WebApplication app)
     {
-        return await sender.Send(command);
+        app.MapGroup(this)
+            .MapGet(GetSmth)
+            .MapPost(CreateUser, "Test");
+    }
+
+    public int GetSmth(int cs)
+    {
+        return 43;
+    }
+    
+    public Task<int> CreateUser(ISender sender, CreateUserCommand command)
+    {
+        return sender.Send(command);
     }
 }
