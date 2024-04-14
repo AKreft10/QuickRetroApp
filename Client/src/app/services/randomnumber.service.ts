@@ -9,7 +9,7 @@ export class RandomnumberService {
 
   constructor(private http: HttpClient) { }
 
-  baseUrl = 'https://localhost:44395/api/RandomNumber/RandomNumber';
+  baseUrl = 'https://quickretro.azurewebsites.net/api/RandomNumber/RandomNumber';
 
   getRandomNumber() : Observable<any> 
   {
