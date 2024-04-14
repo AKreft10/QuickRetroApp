@@ -1,0 +1,19 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>Logowanie</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form>
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Podaj swój email" [(ngModel)]="loginData.email" name="email">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Hasło</mat-label>
+          <input matInput type="password" placeholder="Podaj swoje hasło" [(ngModel)]="loginData.password" name="password">
+        </mat-form-field>
+        <button mat-raised-button color="primary">Zaloguj się</button>
+      </form>
+      <p>{{randomNumber}}</p>
+    </mat-card-content>
+  </mat-card>

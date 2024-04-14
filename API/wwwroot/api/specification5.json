@@ -6,10 +6,10 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/api/BoardController": {
+    "/api/Boards/Create": {
       "post": {
         "tags": [
-          "BoardController"
+          "Boards"
         ],
         "operationId": "Create",
         "requestBody": {
@@ -31,10 +31,31 @@
         }
       }
     },
-    "/api/UserController/Register": {
+    "/api/RandomNumber/RandomNumber": {
+      "get": {
+        "tags": [
+          "RandomNumber"
+        ],
+        "operationId": "GetRandomNumber",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Users/Register": {
       "post": {
         "tags": [
-          "UserController"
+          "Users"
         ],
         "operationId": "RegisterNewUser",
         "requestBody": {

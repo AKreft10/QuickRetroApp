@@ -31,6 +31,27 @@
         }
       }
     },
+    "/api/RandomNumber/RandomNumber": {
+      "get": {
+        "tags": [
+          "RandomNumber"
+        ],
+        "operationId": "GetRandomNumber",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Users/Register": {
       "post": {
         "tags": [

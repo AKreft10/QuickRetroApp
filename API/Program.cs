@@ -15,7 +15,7 @@ builder.Services.AddWebServices();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-
+app.UseCors("AllowSpecificOrigin");
 if (app.Environment.IsDevelopment())
 {
     await app.InitialiseDatabaseAsync();
@@ -28,7 +28,7 @@ app.UseHttpsRedirection();
 app.UseSwaggerUi(settings =>
 {
     settings.Path = "/api";
-    settings.DocumentPath = "/api/specification4.json";
+    settings.DocumentPath = "/api/specification5.json";
 });
 
 app.MapRazorPages();

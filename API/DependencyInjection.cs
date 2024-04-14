@@ -4,6 +4,14 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddWebServices(this IServiceCollection services)
     {
+        services.AddCors(options =>
+        {
+            options.AddPolicy("AllowSpecificOrigin",
+                builder => builder.WithOrigins("http://localhost:4200") 
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+        });
+        
         services.AddDatabaseDeveloperPageExceptionFilter();
 
 
