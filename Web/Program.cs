@@ -1,4 +1,5 @@
 using Infrastructure;
+using Infrastructure.Data;
 using NSwag.AspNetCore;
 
 
@@ -14,13 +15,20 @@ builder.Services.AddWebServices();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
+if (app.Environment.IsDevelopment())
+{
+    await app.InitialiseDatabaseAsync();
+}
+
+
 app.UseStaticFiles();
 app.UseHttpsRedirection();
 
 app.UseSwaggerUi(settings =>
 {
     settings.Path = "/api";
-    settings.DocumentPath = "/api/specification3.json";
+    settings.DocumentPath = "/api/specification4.json";
 });
 
 app.MapRazorPages();

@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Application.Users.Commands;
 
-public record CreateUserCommand : IRequest<int>
+public record CreateUserCommand : IRequest<Guid>
 {
     public string Email { get; set; }
     public string Nickname { get; set; }
@@ -12,7 +12,7 @@ public record CreateUserCommand : IRequest<int>
     public string Nationality { get; set; }
 }
 
-public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int>
+public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
 {
     private readonly IApplicationDbContext _dbContext;
 
@@ -21,7 +21,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int>
         _dbContext = dbContext;
     }
     
-    public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+    public async Task<Guid> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
         var userEntity = new User()
         {
