@@ -7,7 +7,7 @@ public static class DependencyInjection
         services.AddCors(options =>
         {
             options.AddPolicy("AllowSpecificOrigin",
-                builder => builder.WithOrigins("http://localhost:4200") 
+                builder => builder.WithOrigins("http://localhost:4200").WithOrigins("https://blue-dune-0e106bc03.5.azurestaticapps.net/")
                     .AllowAnyMethod()
                     .AllowAnyHeader());
         });
