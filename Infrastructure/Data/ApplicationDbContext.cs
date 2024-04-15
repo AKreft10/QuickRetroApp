@@ -21,6 +21,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
         var connectionString =
             "Server=localhost;Database=QuickRetro;Trusted_Connection=True;TrustServerCertificate=true";
 
+
         optionsBuilder.UseSqlServer(connectionString);
     }
 }

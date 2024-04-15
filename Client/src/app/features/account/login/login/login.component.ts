@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { RandomnumberService } from '../../../../services/randomnumber.service';
 
 @Component({
@@ -7,6 +7,8 @@ import { RandomnumberService } from '../../../../services/randomnumber.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  @Output() dataEmmiter = new EventEmitter<boolean>(false);
+
   constructor(private serv : RandomnumberService){}
   ngOnInit(): void {
     this.getRandomNumber();
@@ -25,5 +27,9 @@ export class LoginComponent implements OnInit {
     this.serv.getRandomNumber().subscribe(data => {
       this.randomNumber = data;
     })
+  }
+
+  switchForms() {
+    this.dataEmmiter.emit(true)
   }
 }

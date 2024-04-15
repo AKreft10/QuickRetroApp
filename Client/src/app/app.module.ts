@@ -7,17 +7,21 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { LoginComponent } from './features/account/login/login/login.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './features/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RegisterComponent } from './features/account/register/register.component';
+import { LoginComponent } from './features/account/login/login/login.component';
+import {MatToolbarModule} from '@angular/material/toolbar'
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     HttpClientModule,
@@ -27,7 +31,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatInputModule,
     MatButtonModule,
     MatCardModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatToolbarModule,
+    MatDividerModule
   ],
   providers: [
     provideAnimationsAsync()

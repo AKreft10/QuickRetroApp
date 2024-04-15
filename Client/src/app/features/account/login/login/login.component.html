@@ -12,8 +12,8 @@
           <mat-label>Hasło</mat-label>
           <input matInput type="password" placeholder="Podaj swoje hasło" [(ngModel)]="loginData.password" name="password">
         </mat-form-field>
-        <button mat-raised-button color="primary">Zaloguj się</button>
+        <button mat-raised-button color="primary" class="submit-button">Zaloguj się</button>
       </form>
-      <p>{{randomNumber}}</p>
+      <p class="annotation-bottom">Nie posiadasz jeszcze konta? <a class="login-link" (click)="switchForms()">Zarejestruj się</a></p>
     </mat-card-content>
   </mat-card>
