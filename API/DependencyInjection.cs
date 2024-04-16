@@ -1,4 +1,7 @@
-﻿namespace Microsoft.Extensions.DependencyInjection;
+﻿using Azure.Identity;
+using Microsoft.Extensions.DependencyInjection.Common;
+
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class DependencyInjection
 {
@@ -20,11 +23,22 @@ public static class DependencyInjection
 
         services.AddRazorPages();
 
-        // Customise default API behaviour
-
         services.AddEndpointsApiExplorer();
 
         services.AddOpenApiDocument((configure, sp) => { configure.Title = "QuickRetro API"; });
+
+        return services;
+    }
+    
+    public static IServiceCollection AddKeyVaultIfConfigured(this IServiceCollection services, ConfigurationManager configuration)
+    {
+        var config = configuration.GetSection("AzureKeyVaultConfig").Get<AzureKeyVaultConfig>();
+        if (!string.IsNullOrWhiteSpace(config.VaultUri))
+        {
+            configuration.AddAzureKeyVault(
+                new Uri(config.VaultUri),
+                new DefaultAzureCredential());
+        }
 
         return services;
     }
