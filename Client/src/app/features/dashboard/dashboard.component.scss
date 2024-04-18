@@ -1,0 +1,31 @@
+::ng-deep body {
+    background: #1a1e23;
+    margin: 0;
+    overflow: hidden;
+    color:white;
+  }
+
+:host {
+    display: block;
+    margin: 20px 15px;
+    max-width: 100%;
+  }
+  
+  @media (min-width: 600px) {
+    :host {
+      margin: 30px 30px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    :host {
+      margin: 50px auto;
+      max-width: 960px;
+    }
+  }
+
+button {
+  font-size: 20px; /* większa czcionka */
+  padding: 10px 20px; /* więcej przestrzeni wokół tekstu i ikony */
+  min-width: 200px; /* minimalna szerokość przycisku */
+}

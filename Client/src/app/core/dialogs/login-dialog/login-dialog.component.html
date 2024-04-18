@@ -1,0 +1,19 @@
+<div class="parent">
+    <h1 mat-dialog-title>Logowanie</h1>
+    <div mat-dialog-content class="content">
+    <form [formGroup]="loginForm" style="text-align:center;" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill" [style.width.%]=80>
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Podaj swój email" formControlName="email">
+        </mat-form-field>
+        <mat-form-field appearance="fill" [style.width.%]=80>
+        <mat-label>Hasło</mat-label>
+        <input matInput type="password" placeholder="Podaj swoje hasło" formControlName="password">
+        </mat-form-field>
+    </form>
+    </div>
+    <div mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Anuluj</button>
+    <button mat-raised-button color="primary" [disabled]="!loginForm.valid" (click)="onSubmit()">Zaloguj się</button>
+    </div>
+</div>

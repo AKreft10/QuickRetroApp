@@ -49,9 +49,4 @@
     <div class="bubble"></div>
     <div class="bubble"></div>
     <div class="bubble"></div>
-
-    <div class="login-form">
-      <app-login *ngIf="arleadyHaveAnAccount" (dataEmmiter)="receiveData($event)"></app-login>
-      <app-register *ngIf="!arleadyHaveAnAccount" (dataEmmiter)="receiveData($event)"></app-register>
-    </div>
   </div>`

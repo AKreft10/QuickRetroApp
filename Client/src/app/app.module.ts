@@ -12,22 +12,25 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './features/home/home.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { RegisterComponent } from './features/account/register/register.component';
-import { LoginComponent } from './features/account/login/login/login.component';
 import {MatToolbarModule} from '@angular/material/toolbar'
 import { JwtInterceptor } from './core/interceptors/JwtInterceptor';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { NavbarComponent } from './features/shared/navbar/navbar.component';
+import { MatDialogModule } from '@angular/material/dialog';
 import { AuthService } from './services/authservice.service';
+import { LoginDialogComponent } from './core/dialogs/login-dialog/login-dialog.component';
+import { RegisterDialogComponent } from './core/dialogs/register-dialog/register-dialog.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent,
-    RegisterComponent,
     DashboardComponent,
     NavbarComponent,
+    LoginDialogComponent,
+    RegisterDialogComponent,
   ],
   imports: [
     HttpClientModule,
@@ -41,6 +44,9 @@ import { AuthService } from './services/authservice.service';
     ReactiveFormsModule,
     MatToolbarModule,
     MatDividerModule,
+    MatDialogModule,
+    MatGridListModule,
+    MatIconModule
   ],
   providers: [
     provideAnimationsAsync(),

@@ -2,10 +2,11 @@
 using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection.Common;
 
 namespace Application.Users.Commands;
 
-public record CreateUserCommand : IRequest<Guid>
+public record CreateUserCommand : IRequest<Result<string>>
 {
     public string Email { get; set; }
     public string Nickname { get; set; }
@@ -13,7 +14,7 @@ public record CreateUserCommand : IRequest<Guid>
     public string Nationality { get; set; }
 }
 
-public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
+public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Result<string>>
 {
     private readonly IApplicationDbContext _dbContext;
     private readonly IPasswordHasher<User> _passwordHasher;
@@ -24,8 +25,13 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
         _passwordHasher = passwordHasher;
     }
     
-    public async Task<Guid> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+    public async Task<Result<string>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
+        if (_dbContext.Users.Any(z => z.Email == request.Email))
+        {
+            return new Result<string>(false, "The user with the specified e-mail address already exists", null);
+        }
+        
         var userEntity = new User()
         {
             Email = request.Email,
@@ -40,6 +46,6 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
         await _dbContext.Users.AddAsync(userEntity, cancellationToken);
         await _dbContext.SaveChangesAsync(cancellationToken);
 
-        return userEntity.Id;
+        return new Result<string>(true, "User has been successfully registered. You can now log in", userEntity.Id.ToString());
     }
 }

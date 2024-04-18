@@ -14,15 +14,13 @@ public class Users : EndpointGroupBase
             .MapPost(Login, "Login");
     }
 
-    public async Task<IResult> RegisterNewUser(ISender sender, CreateUserCommand createUserCommand)
+    public async Task<Result<string>> RegisterNewUser(ISender sender, CreateUserCommand createUserCommand)
     {
-        var result = await sender.Send(createUserCommand);
-        return Results.Text(result.ToString());
+        return await sender.Send(createUserCommand);
     }
 
     public async Task<Result<string>> Login(ISender sender, LoginUserQuery loginUserQuery)
     {
-        var result = await sender.Send(loginUserQuery);
-        return new Result<string>(success: true, message: null, result);
+        return await sender.Send(loginUserQuery);
     }
 }

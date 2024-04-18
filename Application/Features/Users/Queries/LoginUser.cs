@@ -5,17 +5,18 @@ using Application.Common.Interfaces;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection.Common;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Application.Users.Commands;
 
-public record LoginUserQuery : IRequest<string>
+public record LoginUserQuery : IRequest<Result<string>>
 {
     public string Email { get; set; }
     public string Password { get; set; }
 }
 
-public class LoginUser : IRequestHandler<LoginUserQuery, string>
+public class LoginUser : IRequestHandler<LoginUserQuery, Result<string>>
 {
     private readonly IApplicationDbContext _dbContext;
     private readonly IPasswordHasher<User> _passwordHasher;
@@ -26,17 +27,18 @@ public class LoginUser : IRequestHandler<LoginUserQuery, string>
         _passwordHasher = passwordHasher;
     }
     
-    public async Task<string> Handle(LoginUserQuery request, CancellationToken cancellationToken)
+    public async Task<Result<string>> Handle(LoginUserQuery request, CancellationToken cancellationToken)
     {
         var user = _dbContext.Users.FirstOrDefault(z => z.Email == request.Email);
 
         if (user is null)
-            throw new BadHttpRequestException("Invalid email or password");
+            return new Result<string>(false, "Invalid email or password", null);
 
         var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password);
-        
-        if(result == PasswordVerificationResult.Failed)
-            throw new BadHttpRequestException("Invalid email or password");
+
+        if (result == PasswordVerificationResult.Failed)
+            return new Result<string>(false, "Invalid email or password", null);
+            
 
         var claims = new List<Claim>()
         {
@@ -57,7 +59,6 @@ public class LoginUser : IRequestHandler<LoginUserQuery, string>
 
         user.LastLogin = DateTime.Now;
         await _dbContext.SaveChangesAsync(cancellationToken);
-        
-        return tokenHandler.WriteToken(token);
+        return new Result<string>(true, "Welcome back (:", tokenHandler.WriteToken(token));
     }
 }
