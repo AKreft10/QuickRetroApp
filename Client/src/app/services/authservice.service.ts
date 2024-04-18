@@ -29,7 +29,7 @@ export class AuthService {
   }
 
   sendLoginForm(userData: LoginUser){
-    this.http.post(`${BASE_API_URL}/Users/Login`, userData)
+    this.http.post(`${environment.apiUrl}/Users/Login`, userData)
     .subscribe((response: any) => {
       if(response.success) {
         localStorage.setItem('jwt', response.content)
