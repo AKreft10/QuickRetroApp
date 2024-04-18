@@ -7,9 +7,9 @@ using Microsoft.Extensions.Configuration;
 namespace Infrastructure.Data;
 public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
-    public ApplicationDbContext()
-    {
-    }
+    // public ApplicationDbContext()
+    // {
+    // }
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
     public DbSet<User> Users { get; set; }
     public DbSet<RetroBoard> RetroBoards { get; set; }

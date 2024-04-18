@@ -1,6 +1,6 @@
 export interface RegisterUser {
     email: string,
     nickname: string,
-    passwordHash: string,
+    password: string,
     nationality: string,
 }

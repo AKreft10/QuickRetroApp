@@ -1,0 +1,8 @@
+<mat-toolbar color="primary">
+    <img class="logo" src="../../../assets/fulllogo.png">
+    <span class="example-fill-remaining-space"></span>
+    <button *ngIf="!(isLoggedIn$ | async)" mat-flat-button color="primary" routerLink="/login" routerLinkActive="active">Log in</button>
+    <button *ngIf="!(isLoggedIn$ | async)" mat-flat-button color="primary" class="signup-button" routerLink="/register" routerLinkActive="active">Sign up</button>
+    <button *ngIf="isLoggedIn$ | async" mat-flat-button color="warn" (click)="logout()">Log out</button>
+  </mat-toolbar>
+  <mat-divider></mat-divider>

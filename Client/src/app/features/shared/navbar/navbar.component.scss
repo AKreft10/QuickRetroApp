@@ -1,0 +1,28 @@
+.logo 
+{
+  width:120px;
+}
+
+.example-fill-remaining-space {
+  /* This fills the remaining space, by using flexbox. 
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+.mat-toolbar.mat-primary {
+  background: #007bff00;
+  color: #fff;
+}
+
+.mat-divider {
+  border-top-color: hsla(183, 94%, 76%, 0.3);;
+}
+
+::ng-deep .mdc-button--outlined .mdc-button__ripple {
+  border-color: green;
+  color: #fff;
+}
+
+.signup-button {
+    margin-left: 10px !important;
+}

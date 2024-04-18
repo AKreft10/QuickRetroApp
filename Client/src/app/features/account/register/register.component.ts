@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output, output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterUser } from './register.interface';
-import { RegisterService } from './register.service';
+import { AuthService } from '../../../services/authservice.service';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +13,7 @@ export class RegisterComponent {
   @Output() dataEmmiter = new EventEmitter<boolean>(false);
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private registerService : RegisterService) {
+  constructor(private fb: FormBuilder, private authService : AuthService) {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       nickname: ['', [Validators.required]],
@@ -51,11 +51,11 @@ export class RegisterComponent {
       {
         email: formValues['email'],
         nickname: formValues['nickname'],
-        passwordHash: formValues['password'],
+        password: formValues['password'],
         nationality: 'Polish'
       };
 
-      this.registerService.sendRegisterForm(registerUserData)
+      this.authService.sendRegisterForm(registerUserData)
       .subscribe(result => {
         console.log(result);
       })

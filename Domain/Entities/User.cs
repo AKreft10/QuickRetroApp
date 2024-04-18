@@ -11,4 +11,5 @@ public class User
     public DateTime? VerificationDate { get; set; }
     public string? PasswordResetToken { get; set; }
     public DateTime? PasswordResetTokenExpires { get; set; }
+    public DateTime? LastLogin { get; set; }
 }

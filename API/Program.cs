@@ -30,7 +30,7 @@ app.UseHttpsRedirection();
 app.UseSwaggerUi(settings =>
 {
     settings.Path = "/api";
-    settings.DocumentPath = "/api/specification5.json";
+    settings.DocumentPath = "/api/specification6.json";
 });
 
 app.MapRazorPages();

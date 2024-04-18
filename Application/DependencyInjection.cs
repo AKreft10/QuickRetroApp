@@ -1,4 +1,6 @@
 ﻿using System.Reflection;
+using Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -14,6 +16,8 @@ public static class DependencyInjection
             cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
         });
 
+        services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+        
         return services;
     }
 }
