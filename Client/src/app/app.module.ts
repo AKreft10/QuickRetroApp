@@ -22,6 +22,7 @@ import { LoginDialogComponent } from './core/dialogs/login-dialog/login-dialog.c
 import { RegisterDialogComponent } from './core/dialogs/register-dialog/register-dialog.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
+import { RetroBoardComponent } from './features/retro-board/retro-board.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { MatIconModule } from '@angular/material/icon';
     NavbarComponent,
     LoginDialogComponent,
     RegisterDialogComponent,
+    RetroBoardComponent,
   ],
   imports: [
     HttpClientModule,
