@@ -5,6 +5,7 @@ using Application.Common.Interfaces;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Common;
 using Microsoft.IdentityModel.Tokens;
 
@@ -20,11 +21,13 @@ public class LoginUser : IRequestHandler<LoginUserQuery, Result<string>>
 {
     private readonly IApplicationDbContext _dbContext;
     private readonly IPasswordHasher<User> _passwordHasher;
+    private readonly IConfiguration _configuration;
 
-    public LoginUser(IApplicationDbContext dbContext, IPasswordHasher<User> passwordHasher)
+    public LoginUser(IApplicationDbContext dbContext, IPasswordHasher<User> passwordHasher, IConfiguration configuration)
     {
         _dbContext = dbContext;
         _passwordHasher = passwordHasher;
+        _configuration = configuration;
     }
     
     public async Task<Result<string>> Handle(LoginUserQuery request, CancellationToken cancellationToken)
@@ -48,7 +51,7 @@ public class LoginUser : IRequestHandler<LoginUserQuery, Result<string>>
             new Claim("Nationality", user.Nationality)
         };
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("0ELuSWcqfaRKStMIZVV1z9KKf99hsT6p"));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("Authentication")["JwtKey"]));
         var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
         var expires = DateTime.Now.AddDays(1);
 

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -27,6 +27,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CardContentDialogComponent } from './features/retrospective-board/dialogs/card-content-dialog/card-content-dialog.component';
 import { EditCardDialogComponent } from './features/retrospective-board/dialogs/edit-dialog/edit-dialog.component';
 import { SettingsBarComponent } from './features/retrospective-board/settings-bar/settings-bar.component';
+import { SetColumnsDialogComponent } from './features/retrospective-board/dialogs/set-columns-dialog/set-columns-dialog.component';
+import { MatSliderModule } from '@angular/material/slider';
+import { SetBackgroundDialogComponent } from './features/retrospective-board/dialogs/set-background-dialog/set-background-dialog.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,9 @@ import { SettingsBarComponent } from './features/retrospective-board/settings-ba
     RetrospectiveBoardComponent,
     CardContentDialogComponent,
     EditCardDialogComponent,
-    SettingsBarComponent
+    SettingsBarComponent,
+    SetColumnsDialogComponent,
+    SetBackgroundDialogComponent
   ],
   imports: [
     HttpClientModule,
@@ -56,12 +61,14 @@ import { SettingsBarComponent } from './features/retrospective-board/settings-ba
     MatDialogModule,
     MatGridListModule,
     MatIconModule,
-    DragDropModule
+    DragDropModule,
+    MatSliderModule
   ],
   providers: [
     provideAnimationsAsync(),
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,20 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { RetrospectiveBoard, RetrospectiveColumn } from './retrospective-board-model';
 import { MatDialog } from '@angular/material/dialog';
 import { CardContentDialogComponent } from './dialogs/card-content-dialog/card-content-dialog.component';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { EditCardDialogComponent } from './dialogs/edit-dialog/edit-dialog.component';
+import { BackgroundService } from '../../services/background.service';
+import { Subscription } from 'rxjs';
+import { SaveTemplate } from '../../interfaces/savetemplate.interface';
 
 @Component({
   selector: 'app-retrospective-board',
   templateUrl: './retrospective-board.component.html',
   styleUrls: ['./retrospective-board.component.scss']
 })
-export class RetrospectiveBoardComponent {
+export class RetrospectiveBoardComponent implements OnDestroy {
+  private subscription: Subscription;
+  backgroundUrl = 'https://img.freepik.com/free-photo/beautiful-aerial-shot-fronalpstock-mountains-switzerland-beautiful-pink-blue-sky_181624-9315.jpg?w=1800&t=st=1713660388~exp=1713660988~hmac=3eac2b800be6c8514e6b45ef6fafc2914237462fa6c49d920604268fae6e0c59';
+  constructor(public dialog : MatDialog, private backgroundService: BackgroundService) {
+    this.subscription = this.backgroundService.backgroundUrl$.subscribe(url => {
+      this.backgroundUrl = url;
+    });
+  }
 
-  bacgroundUrl = 'https://img.freepik.com/free-photo/beautiful-aerial-shot-fronalpstock-mountains-switzerland-beautiful-pink-blue-sky_181624-9315.jpg?w=1800&t=st=1713660388~exp=1713660988~hmac=3eac2b800be6c8514e6b45ef6fafc2914237462fa6c49d920604268fae6e0c59';
-  constructor(public dialog : MatDialog) {}
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   openDialog(column: RetrospectiveColumn): void {
     const dialogRef = this.dialog.open(CardContentDialogComponent, {
@@ -40,6 +51,16 @@ export class RetrospectiveBoardComponent {
       { name: 'More xc', cards: [] }
     ]
   };
+
+  getTemplate() : SaveTemplate {
+    var templateData : SaveTemplate = {
+      name: "dasdasd34",
+      columns: this.board.columns.map(column => column.name),
+      bacgroundUrl: this.backgroundUrl
+    }
+
+    return templateData;
+  }
 
   addCard(column: RetrospectiveColumn, cardContent: string): void {
     column.cards.push(cardContent);

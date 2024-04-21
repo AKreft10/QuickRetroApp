@@ -3,7 +3,7 @@
   "defaultVariables": null,
   "documentGenerator": {
     "aspNetCoreToOpenApi": {
-      "project": "Web.csproj",
+      "project": "API.csproj",
       "documentName": "v1",
       "msBuildProjectExtensionsPath": null,
       "configuration": null,
@@ -14,7 +14,7 @@
       "verbose": false,
       "workingDirectory": null,
       "aspNetCoreEnvironment": null,
-      "output": "wwwroot/api/specification4.json",
+      "output": "wwwroot/api/specification.json",
       "newLineBehavior": "Auto"
     }
   },

@@ -2,7 +2,6 @@
     background: #1a1e23;
     margin: 0;
     overflow: hidden;
-    color:white;
   }
 
 :host {
@@ -28,4 +27,14 @@ button {
   font-size: 20px;
   padding: 10px 20px;
   min-width: 200px; 
+}
+
+.card-image 
+{
+  max-width: 200px;
+}
+
+.template-container {
+  display: flex;
+  gap:10px;
 }

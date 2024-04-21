@@ -1,0 +1,364 @@
+{
+  "x-generator": "NSwag v14.0.7.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))",
+  "openapi": "3.0.0",
+  "info": {
+    "title": "QuickRetro API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/Boards/Create": {
+      "post": {
+        "tags": [
+          "Boards"
+        ],
+        "operationId": "Create",
+        "requestBody": {
+          "x-name": "createBoardCommand",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBoardCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/RandomNumber/RandomNumber": {
+      "get": {
+        "tags": [
+          "RandomNumber"
+        ],
+        "operationId": "GetRandomNumber",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Templates/SaveTemplate": {
+      "post": {
+        "tags": [
+          "Templates"
+        ],
+        "operationId": "SaveTemplate",
+        "requestBody": {
+          "x-name": "saveTemplateCommand",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveTemplateCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultOfString"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Templates/GetSavedTemplates": {
+      "get": {
+        "tags": [
+          "Templates"
+        ],
+        "operationId": "GetSavedTemplates",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultOfListOfRetroBoardTemplate"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Users/Register": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "RegisterNewUser",
+        "requestBody": {
+          "x-name": "createUserCommand",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultOfString"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Users/Login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "Login",
+        "requestBody": {
+          "x-name": "loginUserQuery",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginUserQuery"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultOfString"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateBoardCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "createdBy": {
+            "type": "string",
+            "format": "guid"
+          }
+        }
+      },
+      "ResultOfString": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "content": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "SaveTemplateCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "bacgroundUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "ResultOfListOfRetroBoardTemplate": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "content": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/RetroBoardTemplate"
+            }
+          }
+        }
+      },
+      "RetroBoardTemplate": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "backgroundUrl": {
+            "type": "string"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RetroBoardTemplateColumn"
+            }
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "email": {
+            "type": "string"
+          },
+          "nickname": {
+            "type": "string"
+          },
+          "passwordHash": {
+            "type": "string"
+          },
+          "nationality": {
+            "type": "string"
+          },
+          "verificationToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "verificationDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "passwordResetToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "passwordResetTokenExpires": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastLogin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "RetroBoardTemplateColumn": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "template": {
+            "$ref": "#/components/schemas/RetroBoardTemplate"
+          }
+        }
+      },
+      "CreateUserCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "nickname": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "nationality": {
+            "type": "string"
+          }
+        }
+      },
+      "LoginUserQuery": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

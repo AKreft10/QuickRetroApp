@@ -12,7 +12,7 @@ builder.Services.AddKeyVaultIfConfigured(builder.Configuration);
 
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder);
-builder.Services.AddWebServices();
+builder.Services.AddWebServices(builder.Configuration);
 
 var app = builder.Build();
 
@@ -23,6 +23,7 @@ if (app.Environment.IsDevelopment())
     await app.InitialiseDatabaseAsync();
 }
 
+app.UseAuthentication();
 
 app.UseStaticFiles();
 app.UseHttpsRedirection();
@@ -30,7 +31,7 @@ app.UseHttpsRedirection();
 app.UseSwaggerUi(settings =>
 {
     settings.Path = "/api";
-    settings.DocumentPath = "/api/specification6.json";
+    settings.DocumentPath = "/api/specification10.json";
 });
 
 app.MapRazorPages();
@@ -41,5 +42,5 @@ app.MapControllerRoute(
 
 
 app.MapEndpoints();
-
+app.UseAuthorization();
 app.Run();

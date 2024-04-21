@@ -1,5 +1,5 @@
-<app-settings-bar></app-settings-bar>
-<div class="board" [ngStyle]="{'background-image': 'url(' + bacgroundUrl + ')'}">
+<app-settings-bar [getTemplate]="getTemplate.bind(this)"></app-settings-bar>
+<div class="board" [ngStyle]="{'background-image': 'url(' + backgroundUrl + ')'}">
     <mat-card *ngFor="let column of board.columns">
       <mat-card-header>
         <mat-form-field appearance="fill">

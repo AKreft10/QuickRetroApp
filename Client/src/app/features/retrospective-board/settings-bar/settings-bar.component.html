@@ -4,15 +4,15 @@
         <mat-icon>play_circle</mat-icon>
         Start retro
       </button>
-      <button mat-fab extended color="accent">
+      <button (click)="openSetColumnsDialog()" mat-fab extended color="accent">
         <mat-icon>view_column</mat-icon>
         Set columns
       </button>
-      <button mat-fab extended color="accent">
+      <button (click)="openSetBackgroundDialog()" mat-fab extended color="accent">
         <mat-icon>image</mat-icon>
         Set background
       </button>
-      <button mat-fab extended color="accent">
+      <button (click)="saveTemplate()" mat-fab extended color="accent">
         <mat-icon>cloud_upload</mat-icon>
         Save template
       </button>

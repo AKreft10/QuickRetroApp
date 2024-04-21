@@ -9,8 +9,14 @@
         Create New Retro
       </button>
     </mat-grid-tile>
-    <mat-grid-tile>RETRO ARCHIEVE</mat-grid-tile>
-    <mat-grid-tile>5</mat-grid-tile>
-    <mat-grid-tile>6</mat-grid-tile>
+    <mat-grid-tile colspan="3">
+      <div class="template-container">
+      <mat-card *ngFor="let template of savedTemplates">
+        <mat-card-header>{{template.name}}</mat-card-header>
+        <mat-card-footer>{{template.createdAt}}</mat-card-footer>
+        <img mat-card-image class="card-image" src="{{template.backgroundUrl}}">
+      </mat-card>
+    </div>
+    </mat-grid-tile>
   </mat-grid-list>
 
