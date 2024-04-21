@@ -1,0 +1,25 @@
+<app-settings-bar></app-settings-bar>
+<div class="board" [ngStyle]="{'background-image': 'url(' + bacgroundUrl + ')'}">
+    <mat-card *ngFor="let column of board.columns">
+      <mat-card-header>
+        <mat-form-field appearance="fill">
+          <mat-label>Column Name</mat-label>
+          <input matInput [(ngModel)]="column.name">
+        </mat-form-field>
+      </mat-card-header>
+      <button mat-flat-button color="primary" (click)="openDialog(column)" class="add-card-button">+</button>
+      <mat-card-content>
+        <div cdkDropList id="cdk-drop-list-{{column.name}}" [cdkDropListData]="column.cards" [cdkDropListConnectedTo]="getConnectedListIds()" class="example-list" (cdkDropListDropped)="drop($event)">
+            <div *ngFor="let card of column.cards" cdkDrag class="card">
+                <div class="card-content">
+                  {{ card }}
+                </div>
+                <div class="card-actions">
+                  <mat-icon class="action-icon" (click)="openEditDialog(column, card)">edit</mat-icon>
+                  <mat-icon class="action-icon" (click)="deleteCard(column, card)">delete</mat-icon>
+                </div>
+              </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>

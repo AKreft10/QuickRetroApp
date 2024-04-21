@@ -22,7 +22,11 @@ import { LoginDialogComponent } from './core/dialogs/login-dialog/login-dialog.c
 import { RegisterDialogComponent } from './core/dialogs/register-dialog/register-dialog.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
-import { RetroBoardComponent } from './features/retro-board/retro-board.component';
+import { RetrospectiveBoardComponent } from './features/retrospective-board/retrospective-board.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CardContentDialogComponent } from './features/retrospective-board/dialogs/card-content-dialog/card-content-dialog.component';
+import { EditCardDialogComponent } from './features/retrospective-board/dialogs/edit-dialog/edit-dialog.component';
+import { SettingsBarComponent } from './features/retrospective-board/settings-bar/settings-bar.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,10 @@ import { RetroBoardComponent } from './features/retro-board/retro-board.componen
     NavbarComponent,
     LoginDialogComponent,
     RegisterDialogComponent,
-    RetroBoardComponent,
+    RetrospectiveBoardComponent,
+    CardContentDialogComponent,
+    EditCardDialogComponent,
+    SettingsBarComponent
   ],
   imports: [
     HttpClientModule,
@@ -48,7 +55,8 @@ import { RetroBoardComponent } from './features/retro-board/retro-board.componen
     MatDividerModule,
     MatDialogModule,
     MatGridListModule,
-    MatIconModule
+    MatIconModule,
+    DragDropModule
   ],
   providers: [
     provideAnimationsAsync(),
