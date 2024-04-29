@@ -10,12 +10,18 @@
       </button>
     </mat-grid-tile>
     <mat-grid-tile colspan="3">
-      <div class="template-container">
+      <!-- <div class="template-container">
       <mat-card *ngFor="let template of savedTemplates">
         <mat-card-header>{{template.name}}</mat-card-header>
         <mat-card-footer>{{template.createdAt}}</mat-card-footer>
         <img mat-card-image class="card-image" src="{{template.backgroundUrl}}">
       </mat-card>
+    </div> -->
+
+    <div class="image-list" fxLayout="row">
+      <ng-container *ngFor="let image of imageListItems">
+        <app-image-list-item class="image-list__item" [image]="image" [style.margin]="'10'+'px'" (click)="onImageListItemClick(image)"></app-image-list-item>
+      </ng-container>
     </div>
     </mat-grid-tile>
   </mat-grid-list>

@@ -7,6 +7,8 @@ import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { BackgroundService } from '../../../services/background.service';
 import { SaveTemplate } from '../../../interfaces/savetemplate.interface';
 import { SaveTemplateService } from '../../../services/save-template.service';
+import { RetroService } from '../../../services/retro.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings-bar',
@@ -16,7 +18,13 @@ import { SaveTemplateService } from '../../../services/save-template.service';
 export class SettingsBarComponent {
   @Input() getTemplate: (() => SaveTemplate) | undefined;
 
-  constructor(public dialog: MatDialog, private columnService: ColumnService, private backgroundService: BackgroundService, private saveTemplateService : SaveTemplateService) {
+  constructor(public dialog: MatDialog, 
+    private columnService: ColumnService, 
+    private backgroundService: BackgroundService, 
+    private saveTemplateService : SaveTemplateService, 
+    private retroService: RetroService,
+    private router: Router
+  ) {
     this.columnService.currentColumnCount.subscribe(count => {
       console.log('Aktualna liczba kolumn:', count);
     });
@@ -49,6 +57,17 @@ export class SettingsBarComponent {
   saveTemplate() : void {
     if(this.getTemplate) {
       this.saveTemplateService.sendSaveTemplateForm(this.getTemplate())
+    }
+  }
+
+  startRetro() : void {
+    if(this.getTemplate) {
+      this.retroService.startRetro(this.getTemplate()).subscribe(data => {
+        if(data.success)
+          {
+            this.router.navigate([`/retro/${data.content}`])
+          }
+      })
     }
   }
 }

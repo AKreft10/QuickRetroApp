@@ -12,3 +12,4 @@ public class RetroBoardTemplate
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public List<RetroBoardTemplateColumn> Columns { get; set; } = new();
 }
+

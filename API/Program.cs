@@ -1,5 +1,6 @@
 using Infrastructure;
 using Infrastructure.Data;
+using Microsoft.Extensions.DependencyInjection.Hubs;
 using NSwag.AspNetCore;
 
 
@@ -43,4 +44,5 @@ app.MapControllerRoute(
 
 app.MapEndpoints();
 app.UseAuthorization();
+app.MapHub<RetroBoardHub>("api/hubs/retroboard");
 app.Run();

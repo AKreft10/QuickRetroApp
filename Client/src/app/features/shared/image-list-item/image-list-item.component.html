@@ -1,0 +1,6 @@
+<div *ngIf="image?.src!.length > 0" fxFlexFill class="image-list-item" (click)="onImageListItemClick()">
+	<div fxFlexFill class="image-list-item__image" [style.background-image]="'url(' + image!.src + ')'"></div>
+	<div class="image-list-item__caption">
+		{{ image!.caption }}
+	</div>
+</div>

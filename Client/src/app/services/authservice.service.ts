@@ -42,7 +42,14 @@ export class AuthService {
     this.http.post(`${environment.apiUrl}/Users/Login`, userData)
     .subscribe((response: any) => {
       if(response.success) {
-        localStorage.setItem('jwt', response.content)
+
+        var expires = new Date()
+        var sessionObject = {
+          expiresAt: expires.setHours(expires.getHours()+12),
+          token: response.content
+        };
+
+        sessionStorage.setItem('jwt', JSON.stringify(sessionObject))
         this.router.navigate(['/dashboard']);
         this.loggedIn.next(true);
         dialog.close();
@@ -53,7 +60,7 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('jwt');
+    sessionStorage.removeItem('jwt');
     this.loggedIn.next(false);
     this.router.navigate(['/home']);
     this.notificationService.show("You are logged out. See you soon (:")

@@ -22,14 +22,16 @@ import { LoginDialogComponent } from './core/dialogs/login-dialog/login-dialog.c
 import { RegisterDialogComponent } from './core/dialogs/register-dialog/register-dialog.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
-import { RetrospectiveBoardComponent } from './features/retrospective-board/retrospective-board.component';
+import { RetrospectiveTemplateComponent } from './features/retrospective-template/retrospective-template.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { CardContentDialogComponent } from './features/retrospective-board/dialogs/card-content-dialog/card-content-dialog.component';
-import { EditCardDialogComponent } from './features/retrospective-board/dialogs/edit-dialog/edit-dialog.component';
-import { SettingsBarComponent } from './features/retrospective-board/settings-bar/settings-bar.component';
-import { SetColumnsDialogComponent } from './features/retrospective-board/dialogs/set-columns-dialog/set-columns-dialog.component';
+import { CardContentDialogComponent } from './features/retrospective-template/dialogs/card-content-dialog/card-content-dialog.component';
+import { EditCardDialogComponent } from './features/retrospective-template/dialogs/edit-dialog/edit-dialog.component';
+import { SettingsBarComponent } from './features/retrospective-template/settings-bar/settings-bar.component';
+import { SetColumnsDialogComponent } from './features/retrospective-template/dialogs/set-columns-dialog/set-columns-dialog.component';
 import { MatSliderModule } from '@angular/material/slider';
-import { SetBackgroundDialogComponent } from './features/retrospective-board/dialogs/set-background-dialog/set-background-dialog.component';
+import { SetBackgroundDialogComponent } from './features/retrospective-template/dialogs/set-background-dialog/set-background-dialog.component';
+import { ImageListItemComponent } from './features/shared/image-list-item/image-list-item.component';
+import { RetrospectiveBoardComponent } from './features/retrospective-board/retrospective-board.component';
 
 @NgModule({
   declarations: [
@@ -39,12 +41,14 @@ import { SetBackgroundDialogComponent } from './features/retrospective-board/dia
     NavbarComponent,
     LoginDialogComponent,
     RegisterDialogComponent,
-    RetrospectiveBoardComponent,
+    RetrospectiveTemplateComponent,
     CardContentDialogComponent,
     EditCardDialogComponent,
     SettingsBarComponent,
     SetColumnsDialogComponent,
-    SetBackgroundDialogComponent
+    SetBackgroundDialogComponent,
+    ImageListItemComponent,
+    RetrospectiveBoardComponent
   ],
   imports: [
     HttpClientModule,

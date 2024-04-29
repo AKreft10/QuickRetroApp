@@ -1,22 +1,21 @@
-<app-settings-bar [getTemplate]="getTemplate.bind(this)"></app-settings-bar>
 <div class="board" [ngStyle]="{'background-image': 'url(' + backgroundUrl + ')'}">
     <mat-card *ngFor="let column of board.columns">
       <mat-card-header>
         <mat-form-field appearance="fill">
           <mat-label>Column Name</mat-label>
-          <input matInput [(ngModel)]="column.name">
+          <input [disabled]="true" matInput [(ngModel)]="column.name">
         </mat-form-field>
       </mat-card-header>
       <button mat-flat-button color="primary" (click)="openDialog(column)" class="add-card-button">+</button>
       <mat-card-content>
-        <div cdkDropList id="cdk-drop-list-{{column.name}}" [cdkDropListData]="column.cards" [cdkDropListConnectedTo]="getConnectedListIds()" class="example-list" (cdkDropListDropped)="drop($event)">
-            <div *ngFor="let card of column.cards" cdkDrag class="card">
+        <div cdkDropList id="cdk-drop-list-{{column.id}}" [cdkDropListData]="column.items" attr.columnId="{{column.id}}" [cdkDropListConnectedTo]="getConnectedListIds()" class="example-list" (cdkDropListDropped)="drop($event)" > 
+            <div *ngFor="let card of column.items" cdkDrag class="card" attr.cardId="{{card.id}}">
                 <div class="card-content">
-                  {{ card }}
+                  {{ card.textContent }}
                 </div>
                 <div class="card-actions">
-                  <mat-icon class="action-icon" (click)="openEditDialog(column, card)">edit</mat-icon>
-                  <mat-icon class="action-icon" (click)="deleteCard(column, card)">delete</mat-icon>
+                  <mat-icon class="action-icon" (click)="openEditDialog(column, card.textContent)">edit</mat-icon>
+                  <mat-icon class="action-icon">delete</mat-icon>
                 </div>
               </div>
         </div>
