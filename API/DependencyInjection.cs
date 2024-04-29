@@ -35,11 +35,11 @@ public static class DependencyInjection
         services.AddCors(options =>
         {
             options.AddPolicy("AllowSpecificOrigin",
-                builder => builder.WithOrigins("http://localhost:4200").WithOrigins("https://blue-dune-0e106bc03.5.azurestaticapps.net/")
+                builder => builder
                     .AllowAnyMethod()
                     .AllowCredentials()
                     .AllowAnyHeader()
-                    .WithOrigins("http://localhost:4200"));
+                    .WithOrigins(["http://localhost:4200", "https://blue-dune-0e106bc03.5.azurestaticapps.net/"]));
         });
         
         services.AddDatabaseDeveloperPageExceptionFilter();
